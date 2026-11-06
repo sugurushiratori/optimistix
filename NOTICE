@@ -1,0 +1,16 @@
+ss-optimistix (branch ss-optimistix of https://github.com/sugurushiratori/optimistix)
+Copyright 2026 Suguru Shiratori, Tokyo City University
+
+This branch is a modified version of Optimistix
+(https://github.com/patrick-kidger/optimistix, Copyright Patrick Kidger and contributors),
+via the fork by Khemraj Shukla (https://github.com/raj-brown/optimistix), which added the
+SSBFGS and SSBroyden solvers. Both are licensed under the Apache License, Version 2.0.
+
+Modifications in this branch:
+- optimistix/_solver/limited_memory_ssbroyden.py (new): LSSBroyden
+- optimistix/_segments.py (new): minimise_segments, new_batch, samplers
+- optimistix/_solver/quasi_newton.py (modified): direct form (use_inverse=False) of SSBroyden
+- optimistix/__init__.py, optimistix/_solver/__init__.py (modified): exports
+- tests/test_lssbroyden.py, test_segments.py, test_ss_step_length.py,
+  test_ssbroyden_direct.py (new)
+- LSSBROYDEN.md, NOTICE, benchmarks/pinn_poisson_lssbroyden.py (new); README.md (modified)

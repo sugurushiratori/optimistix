@@ -1,5 +1,19 @@
 <h1 align="center">SS-Quasi-Newton-Optimistix</h1>
 
+> **Branch `ss-optimistix`.** This branch adds a limited-memory self-scaled Broyden
+> solver, `optx.LSSBroyden`, and segment-wise training with changing data
+> (`optx.minimise_segments`, `optx.new_batch`, and the samplers `optx.UniformSampler`,
+> `optx.RADSampler`, `optx.RARDSampler`) to the SSBFGS/SSBroyden fork. It also fixes the
+> direct form (`use_inverse=False`) of `optx.SSBroyden`. See [LSSBROYDEN.md](LSSBROYDEN.md)
+> for usage and [NOTICE](NOTICE) for the list of changes.
+>
+> ```bash
+> pip install "optimistix @ git+https://github.com/sugurushiratori/optimistix.git@ss-optimistix"
+> ```
+>
+> A PyTorch version is available as
+> [torch-ssbroyden](https://github.com/Shiratori-Lab/torch-ssbroyden).
+
 This library provides two quasi-Newton optimizers — **SSBFGS** and **SSBroyden** — developed on top of [Optimistix](https://github.com/patrick-kidger/optimistix), a [JAX](https://github.com/google/jax)-based library for nonlinear solvers including root finding, minimization, fixed-point problems, and least-squares optimization.
 
 ---
