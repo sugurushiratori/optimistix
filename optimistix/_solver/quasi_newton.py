@@ -1019,7 +1019,8 @@ class AbstractSSBroyden(AbstractQuasiNewton[Y, Aux, _Hessian, None]):
                 ## h_k
                 solution = lx.linear_solve(hessian, grad_diff)
 
-                h_k = tree_dot(y_diff, solution.value)
+                # h_k = y^T B^{-1} y / s^T y  (Kiyani et al. 2025, Eq. (5))
+                h_k = tree_dot(grad_diff, solution.value) / term3
 
                 ## a_k
                 a_k = jnp.abs(h_k * b_k - 1)
@@ -1047,7 +1048,7 @@ class AbstractSSBroyden(AbstractQuasiNewton[Y, Aux, _Hessian, None]):
                 # \sigma_k
                 sigma_k = 1 + a_k * theta_k
 
-                N = 1 - num_elements if num_elements > 1 else 0
+                N = num_elements if num_elements > 1 else 0
 
                 # \sigma_k^(1-N)
                 sigma_k_n = jnp.abs(sigma_k) ** (1.0 / (1 - N))
@@ -1056,10 +1057,10 @@ class AbstractSSBroyden(AbstractQuasiNewton[Y, Aux, _Hessian, None]):
                 phi_k = (1.0 - theta_k) / (1 + a_k * theta_k)
 
                 true_branch_theta = lambda theta_k: rho_k_pos * jnp.minimum(
-                    sigma_k_n ** (1 - num_elements), 1 / theta_k
+                    sigma_k_n, 1 / theta_k
                 )
                 false_branch_theta = lambda theta_k: jnp.minimum(
-                    rho_k_pos * sigma_k ** (1 - num_elements), sigma_k
+                    rho_k_pos * sigma_k_n, sigma_k
                 )
                 tau_k = filter_cond(  # pyright: ignore
                     theta_k > 0,
