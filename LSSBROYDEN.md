@@ -20,6 +20,10 @@ sol = optx.minimise(loss_fn, solver, params, max_steps=20_000, throw=False)
 | `h0` | `"latest"` | `"latest"`: γ = sᵀy/yᵀy (standard L-BFGS choice). `"identity"`: H0 = I. `"bb1"`: γ = sᵀs/sᵀy (experimental). A positive number: fixed γ (experimental) |
 | `search` | `Zoom(initial_guess_strategy="one")` | strong Wolfe, c1 = 1e-4, c2 = 0.9 (as in the paper) |
 
+Tested with jax 0.4.38 / equinox 0.11.12 / lineax 0.0.8 and with jax 0.12 / equinox 0.13.8 /
+lineax 0.1.1 / optax 0.2.8 (CPU). jax 0.4.38 has no CUDA build for aarch64 (e.g. GH200), so
+GPU use there needs the newer versions.
+
 The variable `params` can be any pytree, for example an Equinox model partitioned with
 `eqx.partition`.
 
