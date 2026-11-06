@@ -30,6 +30,10 @@ from .levenberg_marquardt import (
     LevenbergMarquardt as LevenbergMarquardt,
 )
 from .limited_memory_bfgs import AbstractLBFGS as AbstractLBFGS, LBFGS as LBFGS
+from .limited_memory_ssbroyden import (
+    AbstractLSSBroyden as AbstractLSSBroyden,
+    LSSBroyden as LSSBroyden,
+)
 from .nelder_mead import NelderMead as NelderMead
 from .newton_chord import Chord as Chord, Newton as Newton
 from .nonlinear_cg import (

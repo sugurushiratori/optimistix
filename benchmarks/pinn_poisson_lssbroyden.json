@@ -1,0 +1,55 @@
+{
+ "n": 3441,
+ "args": {
+  "evals": 3000,
+  "adam": 1000,
+  "width": 40,
+  "depth": 3,
+  "no_dense": false,
+  "out": "benchmarks/pinn_poisson_lssbroyden.json"
+ },
+ "results": {
+  "optx.LBFGS m=20 (backtracking)": {
+   "loss": 7.821860773634213e-06,
+   "relL2": 0.0015103101930865922,
+   "time": 134.12630152702332,
+   "accepted": 2713
+  },
+  "L-BFGS m=20 (zoom)": {
+   "loss": 8.337064235060008e-06,
+   "relL2": 0.001709924797955799,
+   "time": 268.7171676158905,
+   "accepted": 2795
+  },
+  "L-SSBroyden m=20": {
+   "loss": 8.449001814500915e-06,
+   "relL2": 0.0013254826593242608,
+   "time": 236.00705695152283,
+   "accepted": 1827
+  },
+  "L-SSBroyden m=100": {
+   "loss": 1.4254909822629504e-07,
+   "relL2": 9.010826867883763e-05,
+   "time": 266.6648600101471,
+   "accepted": 1958
+  },
+  "L-SSBroyden m=100 H0=I": {
+   "loss": 3.2150029742177046e-09,
+   "relL2": 1.9812103256416715e-05,
+   "time": 275.41388630867004,
+   "accepted": 2033
+  },
+  "SSBFGS (fork, dense, zoom)": {
+   "loss": 1.4121208189198497e-07,
+   "relL2": 9.965504856482083e-05,
+   "time": 183.2058069705963,
+   "accepted": 326
+  },
+  "SSBroyden (fork, dense, backtracking)": {
+   "loss": 6.53190924890131e-06,
+   "relL2": 0.0015783966532028411,
+   "time": 60.246299028396606,
+   "accepted": 215
+  }
+ }
+}
