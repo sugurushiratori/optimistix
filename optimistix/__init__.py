@@ -30,6 +30,13 @@ from ._root_find import (
     AbstractRootFinder as AbstractRootFinder,
     root_find as root_find,
 )
+from ._segments import (
+    minimise_segments as minimise_segments,
+    new_batch as new_batch,
+    RADSampler as RADSampler,
+    RARDSampler as RARDSampler,
+    UniformSampler as UniformSampler,
+)
 from ._search import (
     AbstractDescent as AbstractDescent,
     AbstractSearch as AbstractSearch,
