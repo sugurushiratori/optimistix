@@ -69,7 +69,9 @@ def ss_tau_phi(b, h, n: int, update: str):
     small = a <= 1e-12
     a_s = jnp.where(small, 1.0, a)
     c = jnp.sqrt(a_s / (1.0 + a_s))
-    rho_m = jnp.minimum(1.0, h * (1.0 - c))
+    # 1 - c = 1 / ((1 + a)(1 + c)); the direct form cancels for large a (and is 0 for a >~ 1e16)
+    one_m_c = jnp.where(a_s < 1e6, 1.0 - c, 1.0 / ((1.0 + a_s) * (1.0 + c)))
+    rho_m = jnp.minimum(1.0, h * one_m_c)
     theta_m = (rho_m - 1.0) / a_s
     theta_p = 1.0 / rho_m
     theta = jnp.maximum(theta_m, jnp.minimum(theta_p, (1.0 - b) / b))

@@ -158,3 +158,14 @@ def test_limited_memory_converges():
         throw=False,
     )
     assert loss(sol.value, None) < 1e-4
+
+
+def test_ss_tau_phi_large_a():
+    # 1 - sqrt(a/(1+a)) underflows to 0 for a >~ 1e16 in the direct form
+    import jax.numpy as jnp
+    import numpy as np
+
+    for a in [1e6, 1e10, 1e16, 1e20]:
+        for b in [1e-3, 0.3, 1.0, 10.0]:
+            tau, phi = ss_tau_phi(jnp.asarray(b), jnp.asarray((1.0 + a) / b), 1000, "ssbroyden")
+            assert np.isfinite(tau) and np.isfinite(phi) and tau > 0 and phi >= 0
